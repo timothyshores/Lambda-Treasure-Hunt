@@ -8,8 +8,12 @@ with open('api.txt', 'r') as reader:
 response = requests.get(
     'https://lambda-treasure-hunt.herokuapp.com/api/adv/init/', headers={
         'Authorization': 'Token ' + key,
-    })
+    }).json()
 
 # Initialize pretty printer and print response from server
 pp = pprint.PrettyPrinter(compact=True, indent=4)
-pp.pprint(response.json())
+pp.pprint(response)
+
+map = {
+    response['room_id']: {exists: "?" for exists in response['exits']}
+}
