@@ -35,8 +35,8 @@ coins_mined = 0
 # Mining - Incomplete
 # mine_location = int(message[-3:])
 # print('Moving to mine')
-# data = move_to_location(data['room_id'], mine_location, data, map)
-# print('In the mine')
+# data = move_to_location(310, 488, data, map)
+print('In the mine')
 
 message = []
 response = {'cooldown': -1}
@@ -48,11 +48,10 @@ while message == []:
     leading_zeros = data['difficulty']
 
     while True:
-        print('get_balance()', get_balance())
         new_proof = proof_of_work(proof, leading_zeros)
         response = mine(new_proof)  # DICTIONARY
-        print("response", response)
-        message = response['messages']
-        print('message', message)
+        print("main.py response", response)
+        # message = response['messages']
+        # print('main.py message', message)
         sleep(response["cooldown"] + 1)
         print(get_balance())

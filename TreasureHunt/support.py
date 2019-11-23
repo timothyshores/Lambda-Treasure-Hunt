@@ -144,6 +144,7 @@ def move_to_location(current_room, destination, data, map):
 
     path = find_path(current_room, destination, map)
     while len(path) > 1:
+        print(path)
         path = trim_path(current_room, path)
         move = str(get_move(path[0], data, map))
         data = make_move({'direction': move,
@@ -213,7 +214,7 @@ def proof_of_work(last_proof, leading_zeros):
 
     start = timer()
 
-    print("Searching for next proof")
+    print("support.py proof_of_work()")
     proof = random.randint(0, 10000000)
     print(f'starting proof:{proof}')
     while valid_proof(last_proof, proof, leading_zeros) is False:
@@ -224,8 +225,9 @@ def proof_of_work(last_proof, leading_zeros):
 
 
 def valid_proof(last_hash, proof, leading_zeros):
-    last_guess_hash = hashlib.sha256(str(last_hash).encode()).hexdigest()
-    guess_hash = hashlib.sha256(str(proof).encode()).hexdigest()
+    # last_guess_hash = hashlib.sha256(str(last_hash).encode()).hexdigest()
+    temp = f"{last_hash}{proof}"
+    guess_hash = hashlib.sha256(temp.encode()).hexdigest()
     # print(guess_hash[:leading_zeros])
     # print('0'.zfill(leading_zeros))
     return guess_hash[:leading_zeros] == '0'.zfill(leading_zeros)
